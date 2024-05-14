@@ -43,18 +43,30 @@ controller.signIn = async (req, res) => {
 	}
 }
 
-controller.getUserName = async (req, res) => {
-	try {
-		const { id } = req.params
-		const data = await userModel.findOne({ where: { id } });
-		if (!data) {
-			return res.status(400).json({ message: 'Invalid username or password' })
-		}
-        return res.json({ message: 'Login successful', data : data.username });
-	} catch (error) {
-		return res.status(500).json({ message: 'User login failed', error: error.message })
-	}
-}
+// controller.getListJob = async (req, res) => {
+// 	try {
+// 		console.log('ii')
+// 		let data = null
+// 		let codeStatus = 0
+//         await axios.get(
+//             `${process.env.API_JOB}recruitment/positions.json`
+//         ).then((res) => {
+//             if (res) {
+//                 data = res
+// 				codeStatus = 200
+//             }
+//         }).catch((err) => {
+//             console.log('err', err)
+//             data = err.response
+// 			codeStatus = 500
+//         })
+// 		console.log('1', data)
+// 		return res.status(codeStatus).json({data})
+//     } catch (e) {
+//         console.log('error trycatch: ', JSON.stringify(e))
+// 		return res.status(500).json({message : e.message})
+//     }
+// }
 
 module.exports = controller;
 

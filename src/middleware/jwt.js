@@ -9,20 +9,16 @@ exports.authenticateJWT = async (req, res, next) => {
 
 			jwt.verify(token, secretKey, (err, user) => {
 				if (err) {
-					return res.status(403).json({"message" : "No authorization"})
+					return res.status(403).json({"message" : "Forbidden, you don't have access"})
 				}
 				req.user = user
 				next();
 			});
 		} else {
-			return res.satus(401).json({
-				message: 'Auth is not complete'
-			})
+			return res.satus(401).json({message: 'Auth is required'})
 		}
 	} catch (error) {
-		return res.status(500).json({
-			message: error.message
-		  })
+		return res.status(500).json({message: error.message})
 	}
     
 };
